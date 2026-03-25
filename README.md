@@ -33,4 +33,4 @@ Follow these steps to host your website for free on your own domain:
 - **Bangalore Localized**: Local address and contact placeholders included.
 
 ---
-*Created with ❤️ for JusPlay Bangalore*
+*Created with ❤️ for Mini Meadows Bangalore*
