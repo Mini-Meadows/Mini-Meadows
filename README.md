@@ -13,17 +13,17 @@ This website is a single-page skeleton designed for a premium toy rental venture
 Follow these steps to host your website for free on your own domain:
 
 1. **Create a GitHub Repository**: 
-   - Initialize a new repository on GitHub (e.g., `jusplay-bangalore`).
+   - Initialize a new repository on GitHub (e.g., `minimeadows-bangalore`).
    - Push all the files from this folder to the repository.
 
 2. **Enable GitHub Pages**:
    - Go to **Settings** > **Pages** in your repository.
    - Select the `main` branch as the source and click **Save**.
-   - Your site will be live at `https://<your-username>.github.io/jusplay-bangalore/`.
+   - Your site will be live at `https://<your-username>.github.io/minimeadows-bangalore/`.
 
 3. **Configure Custom Domain**:
    - In the **Pages** settings, find the **Custom domain** section.
-   - Enter your domain (e.g., `jusplaybangalore.in`).
+   - Enter your domain (e.g., `minimeadows.in`).
    - Update your domain's DNS settings (A records and CNAME) as per GitHub's documentation.
 
 ## 🛠 Features Included
