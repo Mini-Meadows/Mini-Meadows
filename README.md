@@ -1,4 +1,4 @@
-# 🚀 JusPlay Bangalore - Deployment Guide
+# 🚀 Mini Meadows Bangalore - Deployment Guide
 
 This website is a single-page skeleton designed for a premium toy rental venture in Bangalore. It is structure-optimized for **GitHub Pages**.
 
