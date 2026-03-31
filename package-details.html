@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Details - Mini Meadows Bangalore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="details-page">
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/MiniMeadows.png" alt="Mini Meadows Logo">
+                <div class="logo-text">Mini Meadows <span>Bangalore</span></div>
+            </a>
+            <ul>
+                <li><a href="index.html#packages">Back to Packages</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container detail-container">
+        <div class="detail-grid">
+            <div class="detail-image">
+                <img id="pkg-image" src="" alt="Package Image">
+            </div>
+            <div class="detail-info">
+                <h1 id="pkg-name">Loading...</h1>
+                <p class="pkg-price" id="pkg-price"></p>
+                <p class="pkg-description" id="pkg-desc"></p>
+
+                <div class="pkg-highlights">
+                    <span id="pkg-capacity"></span>
+                    <span>5-6 Hours Duration</span>
+                </div>
+
+                <h3>What's Included:</h3>
+                <ul id="pkg-inventory" class="inventory-list">
+                </ul>
+
+                <div class="booking-box">
+                    <p><strong>Booking Policy:</strong> 50% advance required to confirm.</p>
+                    <a href="https://wa.me/916362905095" class="btn btn-primary">Book via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Specific logic for the details page
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            const pkgId = params.get('id');
+            displayPackageDetails(pkgId);
+        };
+    </script>
+</body>
+
+</html>

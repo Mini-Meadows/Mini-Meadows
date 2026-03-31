@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Simple scroll animation for reveal effects
     const revealElements = document.querySelectorAll('.category-card, .step, .promise-item');
-    
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -61,3 +61,49 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Data from Totsters Premium Packages PDF
+const packagesData = {
+    'wonder': {
+        name: "Wonder Play Pack",
+        price: "₹9,999",
+        desc: "Designed for intimate celebrations like birthdays, family gatherings, or small events, the\
+                Wonder Play Pack creates a vibrant mini–play zone that keeps kids happily\
+                engaged throughout the occasion. This curated setup blends active play, sensory fun,\
+                and social interaction, ensuring children stay entertained while parents enjoy the event\
+                stress-free",
+        capacity: "8-10 Kids",
+        image: "assets/images/cat-active.jpg",
+        items: ["Roller coaster with car", "Slide with swing", "Ball pool", "Junior see saw", "Jumbo cuckoo ride on", "Play gym", "Magic car Medium", "Basketball", "Caterpillar"]
+    },
+    'mega': {
+        name: "Mega Fun Pack",
+        price: "₹14,999",
+        desc: "Ideal for medium-sized gatherings like engagement, reception, haldi celebration.",
+        capacity: "12-15 Kids",
+        image: "assets/images/cat-wooden.jpg",
+        items: ["Roller coaster with car", "Slide with swing", "Slide", "Ball pool", "Junior see saw", "Senior see saw", "Elephant 3 way rocker", "Jumbo cuckoo ride on", "Jumbo stallion ride on", "Play gym", "Cozy Coupe car", "Magic car Medium", "Basketball"]
+    },
+    'royal': {
+        name: "Royal Carnival Pack",
+        price: "₹17,999",
+        desc: "Best for grand celebrations such as birthdays, weddings, corporate events.",
+        capacity: "20-25 Kids",
+        image: "assets/images/cat-premium.jpg",
+        items: ["Large 8ft Trampoline (age 7-14)", "Roller coaster with car", "Slide with swing", "Slide", "Ball pool", "Junior see saw", "Senior see saw", "Elephant 3 way rocker", "Jumbo cuckoo ride on", "Jumbo stallion ride on", "Play gym (2 nos)", "Cozy Coupe car", "Magic car Medium", "Magic car large", "Basketball"]
+    }
+};
+
+function displayPackageDetails(id) {
+    const pkg = packagesData[id];
+    if (!pkg) return;
+
+    document.getElementById('pkg-name').textContent = pkg.name;
+    document.getElementById('pkg-price').textContent = pkg.price;
+    document.getElementById('pkg-desc').textContent = pkg.desc;
+    document.getElementById('pkg-capacity').textContent = `👥 Accommodates ${pkg.capacity}`;
+    document.getElementById('pkg-image').src = pkg.image;
+
+    const list = document.getElementById('pkg-inventory');
+    list.innerHTML = pkg.items.map(item => `<li>${item}</li>`).join('');
+}
