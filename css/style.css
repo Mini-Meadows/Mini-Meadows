@@ -368,6 +368,25 @@ footer {
     font-size: 1.2rem;
 }
 
+.social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1.2rem;
+}
+
+.social-links a {
+    color: #bdc3c7;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links a:hover {
+    color: var(--accent);
+    transform: translateY(-3px);
+}
+
 .footer-bottom {
     border-top: 1px solid #3d4a4d;
     padding: 2rem 0;
