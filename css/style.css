@@ -8,6 +8,10 @@
     --gray: #636e72;
     --bg-gradient: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    --btn-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
+    --primary-gradient: linear-gradient(135deg, #37c0f7 0%, #37c0f7 100%);
+    --secondary-gradient: linear-gradient(135deg, #f26b3c 0%, #d35400 100%);
 }
 
 * {
@@ -124,35 +128,78 @@ nav ul li a:hover {
     margin-right: auto;
 }
 
+.cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
 .btn {
     display: inline-block;
-    padding: 1rem 2.5rem;
+    padding: 1.1rem 2.8rem;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    transition: all 0.3s ease;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
+    border: none;
+    outline: none;
+    text-align: center;
+    box-shadow: var(--btn-shadow);
 }
 
 .btn-primary {
-    background-color: #02721a;
+    background: var(--primary-gradient);
     color: var(--white);
-    margin-right: 1rem;
 }
 
 .btn-primary:hover {
-    background-color: #02721a;
-    transform: translateY(-3px);
+    background: var(--primary-gradient);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: var(--btn-shadow-hover);
+    color: var(--white);
 }
 
 .btn-secondary {
-    background-color: var(--white);
-    color: var(--primary);
+    background: var(--white);
+    color: #37c0f7;
+    border: 2px solid #37c0f7;
+    padding: 0.95rem 2.65rem; /* Adjust for border */
 }
 
 .btn-secondary:hover {
-    background-color: #eee;
-    transform: translateY(-3px);
+    background: #37c0f7;
+    color: var(--white);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: var(--btn-shadow-hover);
+}
+
+.btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: var(--btn-shadow);
+}
+
+.btn-whatsapp {
+    background: #25D366;
+    color: var(--white);
+    padding: 0.8rem 1.8rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 1.5rem auto 0;
+    width: fit-content;
+}
+
+.btn-whatsapp:hover {
+    background: #128c7e;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+    color: var(--white);
 }
 
 /* Sections */
@@ -343,6 +390,25 @@ footer {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+
+    .cta-group {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-whatsapp {
+        width: fit-content;
+        padding: 0.8rem 1.5rem;
+    }
 }
 
 /* Package Card Links */
@@ -361,8 +427,32 @@ footer {
 
 .btn-text {
     color: var(--secondary);
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.btn-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: width 0.3s ease;
+}
+
+.category-card:hover .btn-text {
+    color: var(--secondary);
+    transform: translateX(5px);
+}
+
+.category-card:hover .btn-text::after {
+    width: 100%;
 }
 
 /* Details Page Layout */
@@ -400,10 +490,29 @@ footer {
 .pkg-highlights span {
     background: #e8f6f5;
     color: var(--secondary);
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 50px;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(33, 178, 166, 0.1);
+    border: 1px solid rgba(33, 178, 166, 0.1);
+}
+
+.details-page header nav ul li a {
+    background: var(--light);
+    color: var(--dark);
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--btn-shadow);
+}
+
+.details-page header nav ul li a:hover {
+    background: var(--white);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--btn-shadow-hover);
 }
 
 .inventory-list {
@@ -444,40 +553,66 @@ footer {
     border-radius: 50px;
     text-align: center;
     font-size: 30px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--btn-shadow);
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Tooltip on Hover */
 .whatsapp-float .tooltip {
     visibility: hidden;
-    width: 100px;
-    background-color: #333;
+    width: 120px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
     color: #fff;
     text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
+    border-radius: 8px;
+    padding: 10px 0;
     position: absolute;
     z-index: 1;
-    right: 120%;
-    font-size: 14px;
+    right: 125%;
+    font-size: 0.9rem;
+    font-weight: 600;
     opacity: 0;
-    transition: opacity 0.3s;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    box-shadow: var(--btn-shadow);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1) translateY(-5px);
+    background-color: #128c7e;
+    box-shadow: var(--btn-shadow-hover);
+}
+
+.whatsapp-float .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    right: 130%;
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    box-shadow: var(--btn-shadow);
+    pointer-events: none;
 }
 
 .whatsapp-float:hover .tooltip {
     visibility: visible;
     opacity: 1;
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    background-color: #128c7e;
+    transform: translateX(0);
 }
 
 /* Optional: Gentle pulse effect */
