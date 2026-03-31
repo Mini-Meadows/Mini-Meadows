@@ -24,8 +24,13 @@
 
     <main class="container detail-container">
         <div class="detail-grid">
-            <div class="detail-image">
-                <img id="pkg-image" src="" alt="Package Image">
+            <div class="detail-image carousel-container">
+                <div class="carousel-track" id="pkg-carousel-track">
+                    <!-- Images dynamically added here -->
+                </div>
+                <button class="carousel-btn prev" id="prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="carousel-btn next" id="next-btn" onclick="moveSlide(1)">&#10095;</button>
+                <div class="carousel-dots" id="carousel-dots"></div>
             </div>
             <div class="detail-info">
                 <h1 id="pkg-name">Loading...</h1>
@@ -34,7 +39,7 @@
 
                 <div class="pkg-highlights">
                     <span id="pkg-capacity"></span>
-                    <span>5-6 Hours Duration</span>
+                    <span><span class="highlight-icon">⏰</span> 5-6 Hours Duration</span>
                 </div>
 
                 <h3>What's Included:</h3>

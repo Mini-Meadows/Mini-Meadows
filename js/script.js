@@ -62,18 +62,13 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Data from Totsters Premium Packages PDF
 const packagesData = {
     'wonder': {
         name: "Wonder Play Pack",
         price: "₹9,999",
-        desc: "Designed for intimate celebrations like birthdays, family gatherings, or small events, the\
-                Wonder Play Pack creates a vibrant mini–play zone that keeps kids happily\
-                engaged throughout the occasion. This curated setup blends active play, sensory fun,\
-                and social interaction, ensuring children stay entertained while parents enjoy the event\
-                stress-free",
+        desc: "Designed for intimate celebrations like birthdays, family gatherings, or small events, the Wonder Play Pack creates a vibrant mini–play zone that keeps kids happily engaged throughout the occasion. This curated setup blends active play, sensory fun, and social interaction, ensuring children stay entertained while parents enjoy the event stress-free",
         capacity: "8-10 Kids",
-        image: "assets/images/cat-active.jpg",
+        images: ["assets/images/cat-active.jpg", "assets/images/cat-wooden.jpg", "assets/images/cat-vehicles.jpg"],
         items: ["Roller coaster with car", "Slide with swing", "Ball pool", "Junior see saw", "Jumbo cuckoo ride on", "Play gym", "Magic car Medium", "Basketball", "Caterpillar"]
     },
     'mega': {
@@ -81,7 +76,7 @@ const packagesData = {
         price: "₹14,999",
         desc: "Ideal for medium-sized gatherings like engagement, reception, haldi celebration.",
         capacity: "12-15 Kids",
-        image: "assets/images/cat-wooden.jpg",
+        images: ["assets/images/cat-wooden.jpg", "assets/images/cat-vehicles.jpg", "assets/images/cat-premium.jpg"],
         items: ["Roller coaster with car", "Slide with swing", "Slide", "Ball pool", "Junior see saw", "Senior see saw", "Elephant 3 way rocker", "Jumbo cuckoo ride on", "Jumbo stallion ride on", "Play gym", "Cozy Coupe car", "Magic car Medium", "Basketball"]
     },
     'royal': {
@@ -89,10 +84,12 @@ const packagesData = {
         price: "₹17,999",
         desc: "Best for grand celebrations such as birthdays, weddings, corporate events.",
         capacity: "20-25 Kids",
-        image: "assets/images/cat-premium.jpg",
+        images: ["assets/images/cat-premium.jpg", "assets/images/cat-active.jpg", "assets/images/cat-wooden.jpg"],
         items: ["Large 8ft Trampoline (age 7-14)", "Roller coaster with car", "Slide with swing", "Slide", "Ball pool", "Junior see saw", "Senior see saw", "Elephant 3 way rocker", "Jumbo cuckoo ride on", "Jumbo stallion ride on", "Play gym (2 nos)", "Cozy Coupe car", "Magic car Medium", "Magic car large", "Basketball"]
     }
 };
+
+let currentSlide = 0;
 
 function displayPackageDetails(id) {
     const pkg = packagesData[id];
@@ -101,9 +98,48 @@ function displayPackageDetails(id) {
     document.getElementById('pkg-name').textContent = pkg.name;
     document.getElementById('pkg-price').textContent = pkg.price;
     document.getElementById('pkg-desc').textContent = pkg.desc;
-    document.getElementById('pkg-capacity').textContent = `👥 Accommodates ${pkg.capacity}`;
-    document.getElementById('pkg-image').src = pkg.image;
+    document.getElementById('pkg-capacity').innerHTML = `<span class="highlight-icon">👥</span> Accommodates ${pkg.capacity}`;
+
+    // Setup Carousel
+    const track = document.getElementById('pkg-carousel-track');
+    if (track) {
+        track.innerHTML = pkg.images.map(imgSrc => `<img src="${imgSrc}" alt="${pkg.name}" class="carousel-slide">`).join('');
+
+        const dots = document.getElementById('carousel-dots');
+        if (dots) {
+            dots.innerHTML = pkg.images.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>`).join('');
+        }
+
+        currentSlide = 0;
+        updateCarousel();
+    }
 
     const list = document.getElementById('pkg-inventory');
     list.innerHTML = pkg.items.map(item => `<li>${item}</li>`).join('');
+}
+
+function updateCarousel() {
+    const track = document.getElementById('pkg-carousel-track');
+    if (!track) return;
+
+    const slides = document.querySelectorAll('.carousel-slide');
+    if (slides.length === 0) return;
+
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+    });
+}
+
+function moveSlide(direction) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+    updateCarousel();
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
 }
