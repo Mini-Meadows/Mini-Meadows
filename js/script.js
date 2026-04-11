@@ -348,13 +348,21 @@ function loadRandomGallery() {
         <img src="${basePhotoUrl}${name}" class="media-item" alt="Play Sphere Event" loading="lazy">
     `).join('');
 
-    // Inject Videos
+    // Inject Videos with Mobile-Friendly Autoplay
     videoContainer.innerHTML = randomVideos.map(name => `
-        <video class="media-item" preload="metadata" playsinline muted loop onmouseover="this.play()" onmouseout="this.pause()">
-            <source src="${baseVideoUrl}${name}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    `).join('');
+    <video 
+        class="media-item" 
+        preload="metadata" 
+        playsinline 
+        muted 
+        loop 
+        autoplay
+        poster="assets/images/PlaySphere.png"
+    >
+        <source src="${baseVideoUrl}${name}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+`).join('');
 }
 
 // Call the function

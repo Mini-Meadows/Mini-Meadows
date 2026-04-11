@@ -1035,8 +1035,10 @@ footer {
     object-fit: cover;
     border-radius: 15px;
     box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease;
     background: var(--gray-light);
+    /* Place-holder color while loading */
+    display: block;
+    /* Prevents alignment issues */
 }
 
 .media-item:hover {
@@ -1046,6 +1048,11 @@ footer {
 
 video.media-item {
     cursor: pointer;
+}
+
+/* Ensure videos specifically don't show a play icon overlay on some mobile browsers */
+video.media-item::-webkit-media-controls {
+    display: none !important;
 }
 
 @media (max-width: 768px) {
