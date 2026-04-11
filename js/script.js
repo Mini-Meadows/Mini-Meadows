@@ -324,6 +324,40 @@ function handleSwipe() {
 document.querySelectorAll('img[data-src]').forEach(img => {
     img.src = img.dataset.src;
 });
+// ==================== DYNAMIC GALLERY LOGIC ==================== 
 
+// 1. List your filenames here (Replace these with your actual filenames)
+const photoNames = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg'];
+const videoNames = ['1.mp4', '2.mp4', '3.mp4', '4.mp4', '5.mp4', '6.mp4', '7.mp4', '8.mp4', '9.mp4', '10.mp4'];
+
+const basePhotoUrl = "https://filedn.eu/lbu0dswNxxUBjQKg0kNdmLu/PlaySphere/Event%20photos/";
+const baseVideoUrl = "https://filedn.eu/lbu0dswNxxUBjQKg0kNdmLu/PlaySphere/Event%20videos/";
+
+function loadRandomGallery() {
+    const photoContainer = document.getElementById('photo-gallery');
+    const videoContainer = document.getElementById('video-gallery');
+
+    if (!photoContainer || !videoContainer) return;
+
+    // Shuffle and pick 5
+    const randomPhotos = photoNames.sort(() => 0.5 - Math.random()).slice(0, 4);
+    const randomVideos = videoNames.sort(() => 0.5 - Math.random()).slice(0, 4);
+
+    // Inject Photos
+    photoContainer.innerHTML = randomPhotos.map(name => `
+        <img src="${basePhotoUrl}${name}" class="media-item" alt="Play Sphere Event" loading="lazy">
+    `).join('');
+
+    // Inject Videos
+    videoContainer.innerHTML = randomVideos.map(name => `
+        <video class="media-item" preload="metadata" playsinline muted loop onmouseover="this.play()" onmouseout="this.pause()">
+            <source src="${baseVideoUrl}${name}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    `).join('');
+}
+
+// Call the function
+loadRandomGallery();
 console.log('🎯 PlaySphere website loaded successfully!');
 console.log('Modern design with smooth animations and interactions enabled.');
