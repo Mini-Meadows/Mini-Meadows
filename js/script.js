@@ -152,6 +152,7 @@ const packagesData = {
         price: "₹9,999",
         desc: "Designed for intimate celebrations like birthdays, family gatherings, or small events, the Wonder Play Pack creates a vibrant mini–play zone that keeps kids happily engaged throughout the occasion. This curated setup blends active play, sensory fun, and social interaction, ensuring children stay entertained while parents enjoy the event stress-free",
         capacity: "8-10 Kids",
+        duration: "5-6 Hours Duration",
         images: ["assets/images/1.jpg", "assets/images/2.jpg", "assets/images/3.jpg", "assets/images/4.jpg"],
         items: [
             "Roller coaster with car",
@@ -170,6 +171,7 @@ const packagesData = {
         price: "₹14,999",
         desc: "Ideal for medium-sized gatherings like engagement, reception, haldi celebration. This pack offers a diverse range of toys that keep kids of all ages entertained and engaged throughout your event.",
         capacity: "12-15 Kids",
+        duration: "5-6 Hours Duration",
         images: ["assets/images/1.jpg", "assets/images/2.jpg", "assets/images/3.jpg", "assets/images/4.jpg"],
         items: [
             "Roller coaster with car",
@@ -192,6 +194,7 @@ const packagesData = {
         price: "₹17,999",
         desc: "Best for grand celebrations such as birthdays, weddings, corporate events. The ultimate play experience with our most premium collection of toys suitable for large gatherings.",
         capacity: "20-25 Kids",
+        duration: "5-6 Hours Duration",
         images: ["assets/images/1.jpg", "assets/images/2.jpg", "assets/images/3.jpg", "assets/images/4.jpg"],
         items: [
             "Large 8ft Trampoline (age 7-14)",
@@ -216,7 +219,8 @@ const packagesData = {
         price: "Ask for pricing",
         desc: "Flexible rental options for home use or longer duration needs. Choose from our wide selection of toys for daily or weekly enjoyment.",
         capacity: "Varies by toy",
-        images: ["assets/images/4.jpg"], // Ensure this path is correct
+        duration: "Flexible Duration",
+        images: ["assets/images/4.jpg", "assets/images/1.jpg", "assets/images/2.jpg", "assets/images/3.jpg"], // Ensure this path is correct
         items: [
             "Individual toy rentals",
             "Weekly subscription packs",
@@ -242,7 +246,8 @@ function displayPackageDetails(id) {
     if (pkgPrice) pkgPrice.textContent = pkg.price;
     if (pkgDesc) pkgDesc.textContent = pkg.desc;
     if (pkgCapacity) pkgCapacity.innerHTML = `<span class="highlight-icon">👥</span> Accommodates ${pkg.capacity}`;
-
+    // Add this line to update the duration dynamically
+    document.getElementById('pkg-duration').textContent = pkg.duration || "5-6 Hours Duration";
     // Setup Carousel
     const track = document.getElementById('pkg-carousel-track');
     if (track) {
