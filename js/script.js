@@ -210,6 +210,19 @@ const packagesData = {
             "Magic car large",
             "Basketball"
         ]
+    },
+    'daily_weekly': {
+        name: "Daily/Weekly Rentals",
+        price: "Ask for pricing",
+        desc: "Flexible rental options for home use or longer duration needs. Choose from our wide selection of toys for daily or weekly enjoyment.",
+        capacity: "Varies by toy",
+        images: ["assets/images/4.jpg"], // Ensure this path is correct
+        items: [
+            "Individual toy rentals",
+            "Weekly subscription packs",
+            "Customized play area setup",
+            "Doorstep delivery and pickup"
+        ]
     }
 };
 
