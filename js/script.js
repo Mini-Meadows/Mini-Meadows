@@ -33,68 +33,41 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // ==================== HEADER SCROLL EFFECT ==================== 
+    // ==================== HEADER SCROLL + ACTIVE NAV (single throttled listener) ====================
     const header = document.querySelector('header');
-    let lastScrollY = 0;
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    let scrollTicking = false;
+
+    function onScroll() {
+        const scrollY = window.scrollY;
+
+        // Header shadow
+        header.classList.toggle('scrolled', scrollY > 50);
+
+        // Active nav link
+        let currentSection = '';
+        sections.forEach(section => {
+            if (scrollY >= section.offsetTop - 200) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href').slice(1) === currentSection);
+        });
+
+        scrollTicking = false;
+    }
 
     window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
+        if (!scrollTicking) {
+            requestAnimationFrame(onScroll);
+            scrollTicking = true;
+        }
+    }, { passive: true });
 
-        if (currentScrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
-        lastScrollY = currentScrollY;
-    });
-
-    // ==================== REVEAL ANIMATION ==================== 
-    const style = document.createElement('style');
-    style.textContent = `
-        .category-card,
-        .step,
-        .promise-item {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .category-card.visible,
-        .step.visible,
-        .promise-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Stagger animations */
-        .category-card:nth-child(2) {
-            transition-delay: 0.1s;
-        }
-        .category-card:nth-child(3) {
-            transition-delay: 0.2s;
-        }
-
-        .step:nth-child(2) {
-            transition-delay: 0.1s;
-        }
-        .step:nth-child(3) {
-            transition-delay: 0.2s;
-        }
-        .step:nth-child(4) {
-            transition-delay: 0.3s;
-        }
-
-        .promise-item:nth-child(2) {
-            transition-delay: 0.1s;
-        }
-        .promise-item:nth-child(3) {
-            transition-delay: 0.2s;
-        }
-    `;
-    document.head.appendChild(style);
-
-    // ==================== MOBILE MENU TOGGLE ==================== 
+    // ==================== MOBILE MENU TOGGLE ====================
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
@@ -104,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navToggle.classList.toggle('active');
         });
 
-        // Close menu when link is clicked
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
@@ -113,36 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==================== ACTIVE NAV LINK ==================== 
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-menu a');
-
-        let currentSection = '';
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-
-            if (window.scrollY >= sectionTop - 200) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').slice(1) === currentSection) {
-                link.classList.add('active');
-            }
-        });
-    });
-
-    // ==================== PAGE LOAD ANIMATION ==================== 
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.6s ease';
-        document.body.style.opacity = '1';
-    }, 100);
+    // ==================== PAGE LOAD ANIMATION ====================
+    // Handled via CSS transitions to avoid JS-triggered opacity flash
+    document.body.classList.add('loaded');
 });
 
 // ==================== PACKAGE DATA ==================== 
@@ -248,11 +193,11 @@ function displayPackageDetails(id) {
     if (pkgCapacity) pkgCapacity.innerHTML = `<span class="highlight-icon">👥</span> Accommodates ${pkg.capacity}`;
     // Add this line to update the duration dynamically
     document.getElementById('pkg-duration').textContent = pkg.duration || "5-6 Hours Duration";
-    // Setup Carousel
+    // Setup Carousel — first image eager, rest lazy
     const track = document.getElementById('pkg-carousel-track');
     if (track) {
-        track.innerHTML = pkg.images.map(imgSrc =>
-            `<img src="${imgSrc}" alt="${pkg.name}" class="carousel-slide">`
+        track.innerHTML = pkg.images.map((imgSrc, i) =>
+            `<img src="${imgSrc}" alt="${pkg.name}" class="carousel-slide"${i > 0 ? ' loading="lazy"' : ''}>`
         ).join('');
 
         const dots = document.getElementById('carousel-dots');
@@ -337,14 +282,8 @@ function handleSwipe() {
     }
 }
 
-// ==================== PERFORMANCE OPTIMIZATION ==================== 
-// Lazy load images
-document.querySelectorAll('img[data-src]').forEach(img => {
-    img.src = img.dataset.src;
-});
-// ==================== DYNAMIC GALLERY LOGIC ==================== 
+// ==================== DYNAMIC GALLERY LOGIC ====================
 
-// 1. List your filenames here (Replace these with your actual filenames)
 const photoNames = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg'];
 const videoNames = ['1.mp4', '2.mp4', '3.mp4', '4.mp4', '5.mp4', '6.mp4', '7.mp4', '8.mp4', '9.mp4', '10.mp4'];
 
@@ -355,35 +294,50 @@ function loadRandomGallery() {
     const photoContainer = document.getElementById('photo-gallery');
     const videoContainer = document.getElementById('video-gallery');
 
-    if (!photoContainer || !videoContainer) return;
+    if (!photoContainer && !videoContainer) return;
 
-    // Shuffle and pick 5
-    const randomPhotos = photoNames.sort(() => 0.5 - Math.random()).slice(0, 4);
-    const randomVideos = videoNames.sort(() => 0.5 - Math.random()).slice(0, 4);
+    const randomPhotos = [...photoNames].sort(() => 0.5 - Math.random()).slice(0, 4);
+    const randomVideos = [...videoNames].sort(() => 0.5 - Math.random()).slice(0, 4);
 
-    // Inject Photos
-    photoContainer.innerHTML = randomPhotos.map(name => `
-        <img src="${basePhotoUrl}${name}" class="media-item" alt="Play Sphere Event" loading="lazy">
-    `).join('');
+    // Photos — all lazy loaded
+    if (photoContainer) {
+        photoContainer.innerHTML = randomPhotos.map(name => `
+            <img src="${basePhotoUrl}${name}" class="media-item" alt="Play Sphere Event" loading="lazy" width="220" height="250">
+        `).join('');
+    }
 
-    // Inject Videos with Mobile-Friendly Autoplay
-    videoContainer.innerHTML = randomVideos.map(name => `
-    <video 
-        class="media-item" 
-        preload="metadata" 
-        playsinline 
-        muted 
-        loop 
-        autoplay
-        poster="assets/images/PlaySphere.png"
-    >
-        <source src="${baseVideoUrl}${name}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-`).join('');
+    // Videos — use IntersectionObserver to only load when scrolled into view
+    if (videoContainer) {
+        videoContainer.innerHTML = randomVideos.map(name => `
+            <video
+                class="media-item"
+                data-src="${baseVideoUrl}${name}"
+                preload="none"
+                playsinline
+                muted
+                loop
+                poster="assets/images/PlaySphere.png"
+            ></video>
+        `).join('');
+
+        // Lazy-load and autoplay videos only when visible
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    if (!video.src && video.dataset.src) {
+                        video.src = video.dataset.src;
+                        video.load();
+                    }
+                    video.play().catch(() => { }); // catch autoplay block silently
+                } else {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.25 });
+
+        videoContainer.querySelectorAll('video').forEach(v => videoObserver.observe(v));
+    }
 }
 
-// Call the function
 loadRandomGallery();
-console.log('🎯 PlaySphere website loaded successfully!');
-console.log('Modern design with smooth animations and interactions enabled.');
