@@ -5,8 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Package Details - Play Sphere Bangalore</title>
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="assets/images/PlaySphere.png" as="image">
+
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Non-blocking font load -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    </noscript>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -54,7 +68,7 @@
     <header>
         <nav class="container">
             <a href="index.html" class="logo">
-                <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo">
+                <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65">
                 <div class="logo-text">Play Sphere <span>Toys & Event Rentals</span></div>
             </a>
             <ul>
@@ -109,7 +123,8 @@
         <div class="container footer-grid">
             <div class="footer-info">
                 <a href="index.html" class="logo footer-logo">
-                    <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo">
+                    <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65"
+                        loading="lazy">
                     <div class="logo-text">
                         Play Sphere <span>Toys & Event Rentals</span>
                     </div>
@@ -161,14 +176,14 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="js/script.js" defer></script>
     <script>
         // Specific logic for the details page
-        window.onload = () => {
+        window.addEventListener('load', () => {
             const params = new URLSearchParams(window.location.search);
             const pkgId = params.get('id');
             displayPackageDetails(pkgId);
-        };
+        });
     </script>
     <a href="https://wa.me/916362905095" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
