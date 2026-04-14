@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#0047FF">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play Sphere Bangalore - Premium Toy Rental Service</title>
     <meta name="description"
@@ -40,17 +41,13 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="css/style.css" as="style">
     <link rel="preload" href="assets/images/PlaySphere.png" as="image">
-    <link rel="preload" href="assets/images/4.jpg" as="image">
+    <link rel="preload" as="image" href="assets/images/hero-bg.jpg" fetchpriority="high">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Google Fonts: load only needed weights, non-render-blocking via media trick -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet"
-        media="print" onload="this.media='all'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    </noscript>
+    <!-- Google Fonts: use display=swap for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
 {
@@ -81,8 +78,8 @@
 <body>
     <header>
         <nav class="container">
-            <a href="#home" class="logo">
-                <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65">
+            <a href="#home" class="logo" aria-label="Play Sphere Home">
+                <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65" fetchpriority="high">
                 <div class="logo-text">
                     Play Sphere <span>Toy & Event Rentals</span>
                 </div>

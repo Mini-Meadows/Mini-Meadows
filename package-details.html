@@ -16,12 +16,8 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Non-blocking font load -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"
-        media="print" onload="this.media='all'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-    </noscript>
+    <!-- Font with display swap for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -68,8 +64,8 @@
 <body class="details-page">
     <header>
         <nav class="container">
-            <a href="index.html" class="logo">
-                <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65">
+            <a href="index.html" class="logo" aria-label="Play Sphere Home">
+                <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65" fetchpriority="high">
                 <div class="logo-text">Play Sphere <span>Toys & Event Rentals</span></div>
             </a>
             <ul>

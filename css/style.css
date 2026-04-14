@@ -336,6 +336,8 @@ section>.container>.section-title {
 /* ==================== PACKAGES SECTION ==================== */
 .packages {
     background: var(--white);
+    content-visibility: auto;
+    contain-intrinsic-size: 0 800px;
 }
 
 .category-grid {
