@@ -1,39 +1,31 @@
 :root {
-    /* PlaySphere Brand Colors - From Logo */
-    /* --primary: #0052CC;
-    --primary-light: #0066FF;
-    --primary-dark: #003999;
-    --secondary: #FF6B35;
-    --secondary-light: #FF8C5A;
-    --accent: #FFA500; */
+    /* PlaySphere Brand Colors - From Logo (Green & Orange) */
     --dark: #1A1A2E;
     --light: #F5F7FA;
     --white: #ffffff;
     --gray: #374151;
     --gray-light: #E5E7EB;
-    --primary: #0047FF;
-    /* Vibrant blue from logo text */
-    --primary-light: #336CFF;
-    --primary-dark: #0036C2;
-    --secondary: #FF6B35;
-    /* Warm orange from logo accents */
-    --secondary-light: #FF8C5A;
-    --accent: #FF9100;
-    /* Star/highlight orange */
+    --primary: #6B9E5F;
+    /* Green from logo text "sphere" */
+    --primary-light: #8AB87A;
+    --primary-dark: #4E7A44;
+    --secondary: #E5B632;
+    /* Orange from logo pin background */
+    --secondary-light: #ECC95A;
+    --secondary-dark: #B38A26;
+    --accent: #E5B632;
 
-    /* Gradients updated with the new brand blue */
-    --primary-gradient: linear-gradient(135deg, #0047FF 0%, #0066FF 100%);
     /* Gradients */
+    --primary-gradient: linear-gradient(135deg, #6B9E5F 0%, #8AB87A 100%);
     --bg-gradient: linear-gradient(135deg, #F5F7FA 0%, #EFF0F5 100%);
-    /* --primary-gradient: linear-gradient(135deg, #0052CC 0%, #0066FF 100%); */
-    --secondary-gradient: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 100%);
-    --blend-gradient: linear-gradient(135deg, #0052CC 0%, #FF6B35 100%);
+    --secondary-gradient: linear-gradient(135deg, #E5B632 0%, #ECC95A 100%);
+    --blend-gradient: linear-gradient(135deg, #6B9E5F 0%, #E5B632 100%);
 
     /* Shadows */
-    --card-shadow: 0 10px 30px rgba(0, 82, 204, 0.08);
-    --card-shadow-hover: 0 20px 40px rgba(0, 82, 204, 0.12);
-    --btn-shadow: 0 4px 15px rgba(0, 82, 204, 0.15);
-    --btn-shadow-hover: 0 8px 25px rgba(0, 82, 204, 0.25);
+    --card-shadow: 0 10px 30px rgba(107, 158, 95, 0.12);
+    --card-shadow-hover: 0 20px 40px rgba(107, 158, 95, 0.16);
+    --btn-shadow: 0 4px 15px rgba(107, 158, 95, 0.2);
+    --btn-shadow-hover: 0 8px 25px rgba(107, 158, 95, 0.3);
 }
 
 * {
@@ -69,7 +61,7 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    border-bottom: 1px solid rgba(0, 82, 204, 0.08);
+    border-bottom: 1px solid rgba(107, 158, 95, 0.08);
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -104,37 +96,50 @@ nav {
     height: 65px;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(0, 82, 204, 0.1));
+    filter: drop-shadow(0 4px 8px rgba(107, 158, 95, 0.15));
     transition: filter 0.3s ease;
 }
 
 .logo:hover img {
-    filter: drop-shadow(0 6px 12px rgba(0, 82, 204, 0.2));
+    filter: drop-shadow(0 6px 12px rgba(107, 158, 95, 0.25));
 }
 
 .logo-text {
     display: flex;
     flex-direction: column;
     line-height: 1.1;
-    color: var(--primary);
-    /* This makes "Play Sphere" the brand blue */
+    color: #000;
     font-weight: 700;
-    /* Ensures it looks bold like the logo */
+    font-size: 1.5rem;
 }
 
-.logo-text::first-line {
-    font-weight: 700;
+.brand-line {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
 }
 
-.logo span {
-    background: var(--secondary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 0.8rem;
+.tagline {
+    font-size: 0.75rem;
     font-weight: 500;
+    color: #000;
     margin-top: 2px;
 }
+
+.brand-play {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: #E5B632;
+    -webkit-text-stroke: 1.5px #6B9E5F;
+}
+
+.brand-sphere {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    color: #6B9E5F;
+}
+
+
 
 nav ul {
     display: flex;
@@ -173,7 +178,7 @@ nav ul li a::before {
 
 nav ul li a:hover {
     color: var(--primary);
-    background: rgba(0, 82, 204, 0.05);
+    background: rgba(107, 158, 95, 0.08);
 }
 
 nav ul li a:hover::before {
@@ -207,7 +212,7 @@ nav ul li a:hover::before {
     right: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(107, 158, 95, 0.15) 0%, transparent 70%);
     border-radius: 50%;
 }
 
@@ -563,8 +568,8 @@ section>.container>.section-title {
 
 /* ==================== FOOTER ==================== */
 footer {
-    background-color: var(--dark);
-    color: var(--white);
+    background-color: #f5f9f4;
+    color: var(--dark);
     padding: 4rem 0 0;
 }
 
@@ -594,7 +599,15 @@ footer {
 
 /* Ensure "Play Sphere" in footer is bright enough to read */
 .footer-info .logo-text {
-    color: var(--white);
+    color: #1A1A2E;
+}
+
+.footer-info .brand-play {
+    -webkit-text-stroke: 1.5px #6B9E5F;
+}
+
+.footer-info .tagline {
+    color: #333;
 }
 
 .footer-info .logo:hover {
@@ -603,7 +616,7 @@ footer {
 }
 
 .footer-info p {
-    color: #bdc3c7;
+    color: #555;
     line-height: 1.6;
 }
 
@@ -616,14 +629,14 @@ footer {
 }
 
 .footer-links ul li a {
-    color: #bdc3c7;
+    color: #555;
     text-decoration: none;
     transition: color 0.3s ease, transform 0.3s ease;
     font-size: 0.95rem;
 }
 
 .footer-links ul li a:hover {
-    color: var(--secondary);
+    color: #6B9E5F;
     transform: translateX(4px);
 }
 
@@ -631,11 +644,11 @@ footer {
 .footer-links h4 {
     margin-bottom: 1.5rem;
     font-size: 1.2rem;
-    color: var(--white);
+    color: #1A1A2E;
 }
 
 .footer-contact p {
-    color: #bdc3c7;
+    color: #555;
     font-size: 0.95rem;
     margin-bottom: 0.8rem;
 }
@@ -647,7 +660,7 @@ footer {
 }
 
 .social-links a {
-    color: #bdc3c7;
+    color: #555;
     transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
     display: flex;
     align-items: center;
@@ -665,10 +678,10 @@ footer {
 }
 
 .footer-bottom {
-    border-top: 1px solid #3d4a4d;
-    padding: 2rem 0;
+    border-top: 1px solid #e0e0e0;
+    padding: 1.5rem 0;
     text-align: center;
-    color: #95A5A6;
+    color: #555;
     font-size: 0.9rem;
 }
 
