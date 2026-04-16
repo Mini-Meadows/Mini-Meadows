@@ -9,7 +9,7 @@
     --dark: #1A1A2E;
     --light: #F5F7FA;
     --white: #ffffff;
-    --gray: #6B7280;
+    --gray: #374151;
     --gray-light: #E5E7EB;
     --primary: #0047FF;
     /* Vibrant blue from logo text */
@@ -668,7 +668,7 @@ footer {
     border-top: 1px solid #3d4a4d;
     padding: 2rem 0;
     text-align: center;
-    color: #7f8c8d;
+    color: #95A5A6;
     font-size: 0.9rem;
 }
 
@@ -975,9 +975,9 @@ footer {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
