@@ -16,12 +16,8 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Non-blocking font load -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"
-        media="print" onload="this.media='all'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-    </noscript>
+    <!-- Font with display swap for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -68,9 +64,9 @@
 <body class="details-page">
     <header>
         <nav class="container">
-            <a href="index.html" class="logo">
-                <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65">
-                <div class="logo-text">Play Sphere <span>Toys & Event Rentals</span></div>
+            <a href="index.html" class="logo" aria-label="Play Sphere Home">
+                <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65" fetchpriority="high">
+                <div class="logo-text"><span class="brand-line"><span class="brand-play">Play</span><span class="brand-sphere">Sphere</span></span><span class="tagline">Toys & Event Rentals</span></div>
             </a>
             <ul>
                 <li><a href="index.html#packages">Back to Packages</a></li>
@@ -127,7 +123,8 @@
                     <img src="assets/images/PlaySphere.png" alt="Play Sphere Logo" width="65" height="65"
                         loading="lazy">
                     <div class="logo-text">
-                        Play Sphere <span>Toys & Event Rentals</span>
+                        <span class="brand-line"><span class="brand-play">Play</span><span class="brand-sphere">Sphere</span></span>
+                        <span class="tagline">Toys & Event Rentals</span>
                     </div>
                 </a>
                 <p>Bringing joy back to playtime while keeping your home clutter-free.</p>
