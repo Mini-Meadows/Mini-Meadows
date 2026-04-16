@@ -1,0 +1,53 @@
+name: Pre-Merge Web Tests
+on: [pull_request, push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Start Local Server
+        run: python -m http.server 8000 & 
+
+      - name: Wait for server
+        run: |
+          for i in {1..10}; do
+            if curl --silent --fail http://localhost:8000/index.html; then
+              echo "Server is up!"
+              break
+            fi
+            echo "Waiting for server..."
+            sleep 2
+          done
+
+      - name: Run Selenium Tests (Parallel)
+        run: |
+          pytest -n auto --html=report.html --self-contained-html --color=no > test-output.txt || true
+          
+          cat test-output.txt
+          
+          echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`text" >> $GITHUB_STEP_SUMMARY
+          cat test-output.txt >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          
+          pytest -n auto -q test_app.py
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-html
+          path: report.html
